@@ -2,7 +2,7 @@
 Chat GPLeet
 
 ## Sub-Heading ##
-A AI tutor helping software engineers master leet problems
+An AI tutor helping software engineers master leet problems
 
 ## Summary ##
 Chat GPLeet is an innovative AI tutor designed to assist software engineers in mastering complex coding problems on LeetCode. Rather than providing outright solutions, this tool offers subtle advice and hints, guiding users towards the answer and enhancing their problem-solving skills.
