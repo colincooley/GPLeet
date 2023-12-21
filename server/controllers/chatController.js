@@ -1,25 +1,27 @@
-const axios = require('axios');
-const openAIEndpoint = 'https://api.openai.com/v1/chat/completions';
+const OpenAI = require('openai');
+
+const openai = new OpenAI();
 
 exports.sendMessage = async (req, res) => {
+  if (req.method !== "POST") {
+    res.status(405).send("Method Not Allowed");
+    return;
+  }
+
+  const { userMessage, previousMessages } = req.body;
+
   try {
-    const userMessage = req.body.message;
-    const response = await axios.post(
-      openAIEndpoint,
-      { messages: [{ role: 'user', content: userMessage }] },
-      {
-        headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    const aiResponse = response.data.choices[0].message.content;
-    res.json({ aiMessage: aiResponse });
+    const messages = [...previousMessages, { role: 'user', content: userMessage }];
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: messages,
+      max_tokens: 256,
+      temperature: 0.7,
+      top_p: 1,
+    });
+    res.status(200).json({ aiMessage: response.choices[0].message });
   } catch (error) {
-    console.error('Error communicating with OpenAI:', error.response?.data || error);
-    res.status(500).send(`Error from OpenAI: ${error.response?.data?.error?.message || 'Error communicating with the AI.'}`);
-
+    console.error('Error communicating with OpenAI:', error);
+    res.status(500).send(`Error communicating with the AI: ${error.message}`);
   }
 };
