@@ -1,39 +1,38 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 function MessageBox({ onSendMessage }) {
   const [newMessage, setNewMessage] = useState('');
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = () => {
     const trimmedMessage = newMessage.trim();
     if (trimmedMessage !== '') {
-      onSendMessage(`You: ${trimmedMessage}`);
+      onSendMessage(trimmedMessage);
       setNewMessage('');
+    }
+  };
 
-      try {
-        console.log(JSON.stringify({ messages: [{ role: 'user', content: trimmedMessage }] }, null, 2));
-        const response = await axios.post('http://localhost:3000/api/chat/message', { message: trimmedMessage });
-        const aiResponse = response.data.aiMessage;
-        onSendMessage(`AI: ${aiResponse}`);
-      } catch (error) {
-        console.error('Error communicating with the server:', error);
-        onSendMessage('AI: Sorry, there was an error processing your message.');
-      }
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onSendMessage(newMessage);
+      setNewMessage('');
     }
   };
 
   return (
-    <div className="message-box">
+    <div className="input-button-container">
       <input
         type="text"
         value={newMessage}
         onChange={(e) => setNewMessage(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Type a message..."
       />
-      <button onClick={handleSendMessage}>Send</button>
+      <button
+        onClick={handleSendMessage} className="send-button">
+        Send
+      </button>
     </div>
   );
 }
 
 export default MessageBox;
-

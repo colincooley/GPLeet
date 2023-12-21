@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Message({ text }) {
-  return <div className="message">{text}</div>;
+function Message({ role, content }) {
+  return <div className={`message ${role}`}>{content}</div>;
 }
 
 export default Message;

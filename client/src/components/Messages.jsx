@@ -3,9 +3,9 @@ import Message from './Message';
 
 function Messages({ messages }) {
   return (
-    <div className="messages">
-      {messages.map((msg, index) => (
-        <Message key={index} text={msg} />
+    <div className="messages-container">
+      {messages.filter(msg => msg.role !== 'system').map((msg, index) => (
+        <Message key={index} text={msg} role={msg.role} content={msg.content} />
       ))}
     </div>
   );
