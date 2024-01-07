@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { supabase } from './components/SupabaseClient';
 import NavBar from './components/NavBar';
@@ -42,9 +42,6 @@ function App() {
       setUserId(session?.user?.id || null);
     });
 
-    // Log to see the structure of unsubscribe
-    console.log('Auth listener unsubscribe function:', unsubscribe);
-
     return () => {
       if (typeof unsubscribe === 'function') {
         unsubscribe();
@@ -62,10 +59,7 @@ function App() {
       return;
     }
     if (user) {
-      console.log('User logged in successfully:', user)
       setUserId(user.id);
-    } else {
-      console.log('Login successful but user not yet defined', user)
     }
   };
 
