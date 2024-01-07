@@ -7,6 +7,10 @@ body {
   color: var(--text-color);
 }
 
+h3 {
+  font-weight: lighter;
+}
+
 .App {
   text-align: center;
   padding: 20px;
@@ -44,6 +48,7 @@ body {
   --user-message-bg-color: #b9fcb8;
   --sidebar-bg-color: #f9f9f9;
   --sidebar-border-right: 1px solid #999;
+  --navbar-background-color: #fff;
   --navbar-border-bottom: 1px solid #999;
   --icon-color: #000;
   --modal-background-color: #fff;
@@ -59,7 +64,7 @@ body {
   --button-hover-bg-color: #2c4d6f;
   --assistant-message-bg-color: #424242;
   --user-message-bg-color: #435763;
-  --sidebar-bg-color: none;
+  --sidebar-bg-color: #1a1a1a;
   --sidebar-border-right: 1px solid #999;
   --navbar-border-bottom: 1px solid #999;
   --icon-color: #fff;
@@ -87,6 +92,7 @@ body {
   background-color: var(--container-bg-color);
   border-radius: 8px;
   padding: 20px;
+  padding-top: 70px;
   margin-top: 20px;
   max-width: 700px;
   margin-left: auto;
@@ -135,6 +141,21 @@ input[type="text"]:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+input[type="password"] {
+  flex-grow: 1;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+}
+
+input[type="password"]:focus {
+  border-color: var(--button-bg-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 [data-theme="dark"] input[type="text"] {
   background-color: #333;
   color: #f5f5f5;
@@ -153,16 +174,23 @@ input[type="text"]:focus {
 }
 
 .navbar {
-  position: relative;
-  z-index: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   border-bottom: var(--navbar-border-bottom);
+  background-color: var(--background-color);
 }
 
 .navbar-title {
+  font-family: sans-serif;
+  font-weight: lighter;
+  font-size: 2rem;
   margin: 0;
 }
 
@@ -195,6 +223,7 @@ input[type="text"]:focus {
 
 .sidebar {
   position: fixed;
+  top: 60px;
   z-index: 100;
   left: -300px;
   width: 250px;
@@ -216,10 +245,6 @@ input[type="text"]:focus {
   margin-right: auto;
 }
 
-.sidebar .login-section {
-  margin-bottom: 20px;
-}
-
 .sidebar input {
   width: 100%;
   padding: 10px;
@@ -232,7 +257,6 @@ input[type="text"]:focus {
 .sidebar button {
   width: 100%;
   padding: 15px;
-  margin-bottom: 10px;
   border: none;
   border-radius: 4px;
   box-sizing: border-box;
@@ -244,6 +268,10 @@ input[type="text"]:focus {
 
 .sidebar button:hover {
   background-color: var(--button-hover-bg-color);
+}
+
+.login-button {
+  margin-bottom: 10px;
 }
 
 .sidebar hr {
@@ -340,10 +368,41 @@ input[type="text"]:focus {
   transition: background-color 0.2s;
 }
 
+.history-item {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
 
+.history-item::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 100%;
+  height: 50%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 
-/* Chat history list styles */
-.chat-history {}
+.history-item:hover {
+  transform: translateY(-5px);
+}
+
+.history-item:active {
+  background-color: var(--button-hover-bg-color);
+}
 
 
 .w-6 {

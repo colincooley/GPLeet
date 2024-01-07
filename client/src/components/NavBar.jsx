@@ -26,8 +26,7 @@ function NavBar({ toggleSideBar, toggleDarkMode, darkMode }) {
         {hamburgerIcon}
       </div>
 
-      <h1 className="navbar-title">Chat GP- Leet</h1>
-
+      <h1 className="navbar-title">Chat GPLeet</h1>
       <div onClick={toggleDarkMode} className="theme-toggle-icon">
         {darkMode ? moonIcon : sunIcon}
       </div>
