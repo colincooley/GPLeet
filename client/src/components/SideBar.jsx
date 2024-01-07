@@ -25,30 +25,6 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
     await handleLogin(email, password);
   };
 
-
-  // async function handleLogin(event) {
-  //   event.preventDefault();
-  //   const { user, error } = await supabase.auth.signInWithPassword({ email, password });
-  //   if (error) {
-  //     console.error('Error logging in:', error);
-  //   } else {
-  //     setLoggedIn(true);
-  //   }
-  //   if (user) {
-  //     updateUserId(user.id);
-  //   }
-  // }
-
-  // async function handleLogout() {
-  //   const { error } = await supabase.auth.signOut();
-  //   if (error) {
-  //     console.error('Error logging out:', error);
-  //   } else {
-  //     updateUserId(null);
-  //     setLoggedIn(false);
-  //   }
-  // }
-
   async function fetchChatHistory(userId) {
     const { data: chatHistory, error: chatHistoryError } = await supabase
       .from('history')
