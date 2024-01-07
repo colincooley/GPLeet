@@ -18,7 +18,7 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
         { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
       ]);
     }
-  }, [userId]);
+  }, [userId, setMessageHistory]);
 
   const onLoginFormSubmit = async (event) => {
     event.preventDefault();
