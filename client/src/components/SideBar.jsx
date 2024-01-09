@@ -80,8 +80,8 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
             <>
               {chatHistory.map((session, index) => {
                 const messagesArray = JSON.parse(session.messages);
-                if (messagesArray.length >= 4) {
-                  const fourthMessageContent = messagesArray[3].content;
+                if (messagesArray.length >= 5) {
+                  const fourthMessageContent = messagesArray[4].content;
                   const words = fourthMessageContent.split(' ');
                   const firstFewWords = words.slice(0, 4).join(' ');
 
