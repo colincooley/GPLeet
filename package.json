@@ -1,5 +1,5 @@
 {
-  "name": "chat-gpleet",
+  "name": "gpleet",
   "version": "1.0.0",
   "description": "An AI tutor helping software engineers master leet problems",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/colincooley/Chat-GPLeet.git"
+    "url": "git+https://github.com/colincooley/GPLeet.git"
   },
   "author": "Colin Cooley",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/colincooley/Chat-GPLeet/issues"
+    "url": "https://github.com/colincooley/GPLeet/issues"
   },
-  "homepage": "https://github.com/colincooley/Chat-GPLeet#readme",
+  "homepage": "https://github.com/colincooley/GPLeet#readme",
   "dependencies": {
     "axios": "^1.6.2",
     "cors": "^2.8.5",
