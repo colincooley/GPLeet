@@ -8,9 +8,6 @@ const router = require('./router');
 app.use(cors());
 app.use(express.json());
 app.use('/api', router);
-app.get('/loaderio-a10337aaa2696cf102ad6a27ad6091d4', (req, res) => {
-  res.send('loaderio-a10337aaa2696cf102ad6a27ad6091d4');
-});
 app.use(express.static(__dirname + '/../client/build'));
 
 
