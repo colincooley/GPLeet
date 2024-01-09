@@ -28,8 +28,10 @@ function RegistrationModal({ onClose, onSubmit }) {
         <h2>Register</h2>
         <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-        <button onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Submit'}</button>
-        <button onClick={onClose}>Cancel</button>
+        <div className="register-buttons">
+          <button onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Submit'}</button>
+          <button onClick={onClose}>Cancel</button>
+        </div>
       </div>
     </div>
   );
