@@ -5,22 +5,50 @@ function RegistrationModal({ onClose, onSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
     setLoading(true);
-    const { user, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    if (error) console.error('Error registering:', error.message);
-    else console.log('User registered:', user);
+      const user = data.user;
+      if (error) throw error;
 
-    setEmail('');
-    setPassword('');
-    setLoading(false);
-    onClose();
+      const { data: userData, error: userInsertError } = await supabase
+        .from('users')
+        .insert([
+          {
+            id: user.id,
+            email,
+          },
+        ]);
+
+      if (userInsertError) throw userInsertError;
+
+      setEmail('');
+      setPassword('');
+      setLoading(false);
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error:', error.message);
+      setLoading(false);
+    }
   };
+
+  if (submitted) {
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <h3>Check your email to confirm your registration!</h3>
+          <button onClick={onClose}>Close</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="modal">
