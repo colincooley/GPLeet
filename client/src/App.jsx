@@ -124,7 +124,7 @@ function App() {
     setMessageHistory(updatedHistory);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/chat/message', {
+      const response = await axios.post('/api/chat/message', {
         userMessage: newMessage,
         previousMessages: updatedHistory,
       });
