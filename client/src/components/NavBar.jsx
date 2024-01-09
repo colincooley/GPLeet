@@ -22,7 +22,7 @@ function NavBar({ toggleSideBar, toggleDarkMode, darkMode }) {
 
   return (
     <nav className="navbar">
-      <div className="hamburger-menu" onClick={() => { console.log('Hamburger clicked'); toggleSideBar(); }}>
+      <div className="hamburger-menu" onClick={() => { toggleSideBar(); }}>
         {hamburgerIcon}
       </div>
 
