@@ -35,7 +35,7 @@ function RegistrationModal({ onClose, onSubmit }) {
       const user = data.user;
       if (error) throw error;
 
-      const { data: userData, error: userInsertError } = await supabase
+      const { error: userInsertError } = await supabase
         .from('users')
         .insert([
           {
