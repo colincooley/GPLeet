@@ -54,6 +54,7 @@ h3 {
   --modal-background-color: #fff;
   --modal-text-color: #333;
   --modal-overlay-background: rgba(0, 0, 0, 0.5);
+  --img-filter: none;
 }
 
 [data-theme="dark"] {
@@ -71,6 +72,7 @@ h3 {
   --modal-background-color: #2c2c2c;
   --modal-text-color: #f5f5f5;
   --modal-overlay-background: rgba(255, 255, 255, 0.2);
+  --img-filter: invert(1);
 }
 
 .send-button {
@@ -435,4 +437,44 @@ input[type="password"]:focus {
 [data-theme="dark"] input[type="text"]:focus {
   border-color: var(--button-hover-bg-color);
   box-shadow: 0 0 5px rgba(55, 90, 127, 0.5);
+}
+
+.footer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 70px;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  color: #212529;
+  text-align: center;
+  padding: 0px;
+  height: 35px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.footer a img {
+  max-height: 70%;
+  filter: var(--img-filter);
+}
+
+[data-theme="dark"] .footer {
+  background-color: var(--button-hover-bg-color);
+  color: #fff;
+}
+
+[data-theme="dark"] .footer a {
+  color: inherit;
 }
