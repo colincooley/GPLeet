@@ -165,6 +165,16 @@ function App() {
           <MessageBox onSendMessage={handleSendMessage} />
         </div>
       </div>
+      <div className="footer">
+
+        <a href="mailto:colincooley1989@gmail.com">
+          <img src={require('./assets/email.ico')} alt="Email" />
+        </a>
+        <a href="https://github.com/colincooley" target="_blank" rel="noopener noreferrer">
+          <img src={require('./assets/github.ico')} alt="GitHub" />
+        </a>
+        <p>&copy; {new Date().getFullYear()} Colin Cooley</p>
+      </div>
     </div>
   );
 }

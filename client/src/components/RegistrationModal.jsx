@@ -92,7 +92,7 @@ function RegistrationModal({ onClose, onSubmit }) {
             </li>
           </ul>
         )}
-        <div className="register-buttons">
+        <div className="register-modal-button">
           <button onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Submit'}</button>
           <button onClick={onClose}>Cancel</button>
         </div>

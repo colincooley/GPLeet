@@ -61,7 +61,12 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             <button type="submit" className="login-button">Login</button>
           </form>
-          <button onClick={onRegisterClick} className="register-button">Register</button>
+          <p>
+            Don't have an account?{' '}
+            <button className="register-sidebar-button" onClick={onRegisterClick}>
+              Register here
+            </button>
+          </p>
         </div>
       ) : (
         <>
