@@ -288,6 +288,18 @@ input[type="password"]:focus {
   transition: background-color 0.2s;
 }
 
+.new-chat-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
 .register-sidebar-button {
   background-color: transparent;
   border: none;
