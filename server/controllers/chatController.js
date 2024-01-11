@@ -13,9 +13,9 @@ exports.sendMessage = async (req, res) => {
   try {
     const messages = [...previousMessages, { role: 'user', content: userMessage }];
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: process.env.OPENAI_MODEL_ID,
       messages: messages,
-      max_tokens: 256,
+      max_tokens: 200,
       temperature: 0.7,
       top_p: 1,
     });
