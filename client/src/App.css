@@ -1,5 +1,5 @@
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -36,6 +36,7 @@ h3 {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 200px;
 }
 
 :root {
@@ -111,6 +112,22 @@ h3 {
   width: fit-content;
 }
 
+.message pre {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
+  line-height: 1.5;
+}
+
 .message.user {
   background-color: var(--user-message-bg-color);
   align-self: flex-end;
@@ -176,6 +193,7 @@ input[type="password"]:focus {
 }
 
 .navbar {
+  font-family: 'Roboto', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
@@ -190,7 +208,7 @@ input[type="password"]:focus {
 }
 
 .navbar-title {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   font-size: 2rem;
   margin: 0;
@@ -224,6 +242,8 @@ input[type="password"]:focus {
 }
 
 .sidebar {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
   position: fixed;
   top: 60px;
   z-index: 100;
@@ -476,6 +496,8 @@ input[type="password"]:focus {
 }
 
 .footer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
   position: fixed;
   display: flex;
   align-items: center;
