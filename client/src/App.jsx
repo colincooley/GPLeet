@@ -11,12 +11,12 @@ import './App.css';
 
 function App() {
   const [messageHistory, setMessageHistory] = useState([
-    { role: 'system', content: <pre>{'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.'} </pre> },
+    { role: 'system', content: 'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.' },
 
-    { role: 'assistant', content: <pre>{'Hello! I am GPLeet and I am here to help you with coding problems.'}</pre> },
+    { role: 'assistant', content: 'Hello! I am GPLeet and I am here to help you with coding problems.' },
 
-    { role: 'assistant', content: <pre>{'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.'}</pre> },
-    { role: 'assistant', content: <pre>{'Be sure to register and login to save your chat history!'}</pre> },
+    { role: 'assistant', content: 'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.' },
+    { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
   ]);
   const [darkMode, setDarkMode] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
@@ -84,12 +84,12 @@ function App() {
         .insert([{ user: userId, messages: JSON.stringify(messageHistory) }]);
 
       setMessageHistory([
-        { role: 'system', content: <pre>{'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.'} </pre> },
+        { role: 'system', content: 'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.' },
 
-        { role: 'assistant', content: <pre>{'Hello! I am GPLeet and I am here to help you with coding problems.'}</pre> },
+        { role: 'assistant', content: 'Hello! I am GPLeet and I am here to help you with coding problems.' },
 
-        { role: 'assistant', content: <pre>{'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.'}</pre> },
-        { role: 'assistant', content: <pre>{'Be sure to register and login to save your chat history!'}</pre> },
+        { role: 'assistant', content: 'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.' },
+        { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
       ]);
 
       if (error) {
@@ -126,7 +126,7 @@ function App() {
     setMessageHistory(updatedHistory);
 
     try {
-      const response = await axios.post('/api/chat/message', {
+      const response = await axios.post('http://localhost:3000/api/chat/message', {
         userMessage: newMessage,
         previousMessages: updatedHistory,
       });
