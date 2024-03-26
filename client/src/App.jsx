@@ -10,14 +10,17 @@ import MessageBox from './components/MessageBox';
 import './App.css';
 
 function App() {
-  const [messageHistory, setMessageHistory] = useState([
+
+  const defaultMessage = [
     { role: 'system', content: 'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.' },
 
     { role: 'assistant', content: 'Hello! I am GPLeet and I am here to help you with coding problems.' },
 
     { role: 'assistant', content: 'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.' },
     { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
-  ]);
+  ];
+
+  const [messageHistory, setMessageHistory] = useState(defaultMessage);
   const [darkMode, setDarkMode] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
@@ -83,14 +86,7 @@ function App() {
         .from('history')
         .insert([{ user: userId, messages: JSON.stringify(messageHistory) }]);
 
-      setMessageHistory([
-        { role: 'system', content: 'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.' },
-
-        { role: 'assistant', content: 'Hello! I am GPLeet and I am here to help you with coding problems.' },
-
-        { role: 'assistant', content: 'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.' },
-        { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
-      ]);
+      setMessageHistory(defaultMessage);
 
       if (error) {
         console.error('Error inserting message history:', error);
@@ -161,6 +157,7 @@ function App() {
           userId={userId}
           handleLogin={handleLogin}
           handleLogout={handleLogout}
+          defaultMessage={defaultMessage}
         />
         <div className={"content"}>
           <Messages messages={messageHistory} />

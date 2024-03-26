@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './SupabaseClient';
 
-function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, insertMessageHistory, userId, updateUserId, handleLogin, handleLogout }) {
+function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, insertMessageHistory, userId, updateUserId, handleLogin, handleLogout, defaultMessage }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [chatHistory, setChatHistory] = useState(null);
+  const [currentChatId, setCurrentChatId] = useState(null);
+
 
   useEffect(() => {
     if (userId) {
       fetchChatHistory(userId);
     } else {
       setChatHistory(null);
-      setMessageHistory([
-        { role: 'system', content: 'You are a helpful tutor, and your primary role is to encourage independent problem-solving in users tackling LeetCode-like problems. do this by asking single, thought provoking questions. DO NOT offer hints. Primarily ask thought-provoking questions to guide them. DO NOT directly solve the problems. DO NOT outline ANY step-by-step approaches. Your goal is to stimulate the users critical thinking and problem-solving skills, NOT to provide complete answers or solutions or to guide them easily to the answer. If a user mentions something other than coding tutoring advised them you are only able to help with coding problems.' },
-
-        { role: 'assistant', content: 'Hello! I am GPLeet and I am here to help you with coding problems.' },
-
-        { role: 'assistant', content: 'Paste the URL link or prompt to the problem you are working on and feel free to ask me for tips and guidance.' },
-        { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
-      ]);
+      setMessageHistory(defaultMessage);
     }
-  }, [userId, setMessageHistory]);
+  }, [userId, setChatHistory, setMessageHistory, defaultMessage]);
 
   const onLoginFormSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +25,7 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
   async function fetchChatHistory(userId) {
     const { data: chatHistory, error: chatHistoryError } = await supabase
       .from('history')
-      .select('messages')
+      .select('id, messages')
       .eq('user', userId);
 
     if (chatHistoryError) {
@@ -41,17 +36,54 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
   }
 
   const handleStartNewSession = async () => {
-    try {
-      await insertMessageHistory(messageHistory);
-      await fetchChatHistory(userId);
-    } catch (error) {
-      console.error('Error handling new session:', error);
+    if (!userId) {
+      console.error('User is not logged in.');
+      return;
+    }
+
+    if (currentChatId) {
+      try {
+        await updateMessageHistory(messageHistory);
+        setCurrentChatId(null);
+        setMessageHistory(defaultMessage);
+      } catch (error) {
+        console.error('Error updating existing session:', error);
+      }
+    } else {
+      try {
+        const newChatId = await insertMessageHistory(messageHistory);
+        setCurrentChatId(newChatId);
+        fetchChatHistory(userId);
+      } catch (error) {
+        console.error('Error starting new session:', error);
+      }
     }
   };
 
   const handleHistoryChange = (index) => {
-    const selectedSession = JSON.parse(chatHistory[index].messages);
-    setMessageHistory(selectedSession);
+    const selectedSession = chatHistory[index];
+    const selectedMessages = JSON.parse(selectedSession.messages);
+    setMessageHistory(selectedMessages);
+    setCurrentChatId(selectedSession.id);
+  };
+
+  const updateMessageHistory = async (newMessageHistory) => {
+    if (!currentChatId) {
+      console.error('No session selected for update.');
+      return;
+    }
+
+    const { error } = await supabase
+      .from('history')
+      .update({ messages: JSON.stringify(newMessageHistory) })
+      .match({ id: currentChatId });
+
+    if (error) {
+      console.error('Error updating chat history:', error);
+    } else {
+      console.log('Chat history updated successfully.');
+      fetchChatHistory(userId);
+    }
   };
 
   return (
