@@ -33,10 +33,14 @@ h3 {
 .content {
   transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
   width: 100%;
-  max-width: 600px;
+  max-width: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  max-height: 664px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 200px;
+  overflow: auto;
 }
 
 :root {
@@ -581,4 +585,15 @@ input[type="password"]:focus {
 
 [data-theme="dark"] .footer a {
   color: inherit;
+}
+
+.message-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.message-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
 }
