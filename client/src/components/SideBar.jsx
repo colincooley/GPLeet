@@ -6,7 +6,7 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
   const [password, setPassword] = useState('');
   const [chatHistory, setChatHistory] = useState(null);
   const [currentChatId, setCurrentChatId] = useState(null);
-
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null);
 
   useEffect(() => {
     if (userId) {
@@ -86,6 +86,35 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
     }
   };
 
+  const toggleDropdown = (index) => {
+    if (activeMenuIndex === index) {
+      setActiveMenuIndex(null);
+    } else {
+      setActiveMenuIndex(index);
+    }
+  };
+
+  const deleteHistoryItem = async () => {
+    if (activeMenuIndex === null) {
+      console.error('No session selected for deletion.');
+      return;
+    }
+
+    const selectedSession = chatHistory[activeMenuIndex];
+    const { error } = await supabase
+      .from('history')
+      .delete()
+      .match({ id: selectedSession.id });
+
+    if (error) {
+      console.error('Error deleting chat history:', error);
+    } else {
+      console.log('Chat history deleted successfully.');
+      setActiveMenuIndex(null);
+      fetchChatHistory(userId);
+    }
+  }
+
   return (
     <div className={show ? 'sidebar show' : 'sidebar'}>
       {!userId ? (
@@ -124,11 +153,23 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
                   const words = fourthMessageContent.split(' ');
                   const firstFewWords = words.slice(0, 4).join(' ');
 
-                  return (
-                    <div className="history-item" onClick={() => handleHistoryChange(index)} key={`session-${index}`}>
-                      {firstFewWords}
-                    </div>
-                  );
+                    return (
+                      <div className="history-container">
+                        <div className="history-item" onClick={() => handleHistoryChange(index)} key={`session-${index}`}>
+                          {firstFewWords}
+                        </div>
+                        <div className="history-item-menu">
+                          <div className="menu-icon" onClick={ () => toggleDropdown(index)}>
+                          &#8942;
+                          </div>
+                          {activeMenuIndex === index && (
+                            <div className="history-dropdown" onMouseLeave={toggleDropdown} >
+                              <button onClick={deleteHistoryItem} >Delete</button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
                 }
                 return null;
               })}

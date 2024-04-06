@@ -56,6 +56,9 @@ h3 {
   --modal-text-color: #333;
   --modal-overlay-background: rgba(0, 0, 0, 0.5);
   --img-filter: none;
+  --delete-bg-color: #ff4444;
+  --delete-text-color: #fff;
+  --delete-hover-bg-color: #cc0000;
 }
 
 [data-theme="dark"] {
@@ -74,6 +77,9 @@ h3 {
   --modal-text-color: #f5f5f5;
   --modal-overlay-background: rgba(255, 255, 255, 0.2);
   --img-filter: invert(1);
+  --delete-bg-color: #ff4444;
+  --delete-text-color: #fff;
+  --delete-hover-bg-color: #cc0000;
 }
 
 .send-button {
@@ -452,6 +458,8 @@ input[type="password"]:focus {
   text-overflow: ellipsis;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
+  width: 100%;
+  text-align: center;
 }
 
 .history-item::after {
@@ -474,6 +482,49 @@ input[type="password"]:focus {
 
 .history-item:active {
   background-color: var(--button-hover-bg-color);
+}
+
+.history-container {
+  display: flex;
+  align-items: center;
+}
+
+.history-item, .history-item-menu {
+  align-items: center;
+}
+
+.history-item-menu {
+  position: relative;
+}
+
+.menu-icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.history-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: none;
+  border: none;
+  z-index: 1000;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.history-dropdown button {
+  padding: 10px 15px;
+  border: none;
+  background-color: var(--delete-bg-color);
+  color: var(--delete-text-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.history-dropdown button:hover {
+  background-color: var(--delete-hover-bg-color);
+  box-shadow: 0 2px 6px rgba(255, 0, 0, 0.3);
 }
 
 
