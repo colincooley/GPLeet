@@ -28,6 +28,7 @@ h3 {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
+  margin-top: 35px;
 }
 
 .content {
