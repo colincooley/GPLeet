@@ -4,7 +4,8 @@ import Message from './Message';
 
 function Messages({ messages }) {
   return (
-    <TransitionGroup className="messages-container">
+    <div className="messages-container" id="messages-container">
+    <TransitionGroup className="messages">
     {messages.filter(msg => msg.role !== 'system').map((msg, index) => (
       <CSSTransition
         key={index}
@@ -15,6 +16,7 @@ function Messages({ messages }) {
       </CSSTransition>
     ))}
   </TransitionGroup>
+  </div>
   );
 }
 

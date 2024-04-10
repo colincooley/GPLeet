@@ -29,6 +29,11 @@ function App() {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
+    const messagesContainer = document.getElementById('messages-container');
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }, [messageHistory]);
+
+  useEffect(() => {
     (async () => {
       const session = await supabase.auth.getSession();
       if (session && session.data && session.data.session && session.data.session.user) {
