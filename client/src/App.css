@@ -210,7 +210,7 @@ input[type="password"]:focus {
 
 .input-button-container {
   display: flex;
-  max-width: 65%;
+  max-width: 40%;
   margin: 10px auto;
 }
 

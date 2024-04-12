@@ -22,6 +22,15 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
     await handleLogin(email, password);
   };
 
+  // useEffect(() => {
+  //   console.log('currentChatId:', currentChatId);
+  //   if (currentChatId && messageHistory) {
+  //     updateMessageHistory(messageHistory);
+  //   } else {
+  //     handleNewChat();
+  //   }
+  // }, [messageHistory]);
+
   async function fetchChatHistory(userId) {
     const { data: chatHistory, error: chatHistoryError } = await supabase
       .from('history')
@@ -34,6 +43,16 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
       setChatHistory(chatHistory);
     }
   }
+
+  const handleNewChat = async () => {
+    try {
+      const newChatId = await insertMessageHistory(messageHistory);
+      setCurrentChatId(newChatId);
+      fetchChatHistory(userId);
+    } catch (error) {
+      console.error('Error starting new session:', error);
+    };
+  };
 
   const handleStartNewSession = async () => {
     if (!userId) {
