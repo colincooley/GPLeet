@@ -20,13 +20,25 @@ function App() {
     { role: 'assistant', content: 'Be sure to register and login to save your chat history!' },
   ], []);
 
-  const [messageHistory, setMessageHistory] = useState(defaultMessage);
+  const [messageHistory, setMessageHistory] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showMessagePopup, setShowMessagePopup] = useState(false);
   const [message, setMessage] = useState('');
   const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const timeouts = defaultMessage.map((message, index) => {
+      return setTimeout(() => {
+        setMessageHistory(prevHistory => [...prevHistory, message]);
+      }, 2000 * index);
+    });
+
+    return () => {
+      timeouts.forEach(clearTimeout);
+    };
+  }, [defaultMessage]);
 
   useEffect(() => {
     const messagesContainer = document.getElementById('messages-container');

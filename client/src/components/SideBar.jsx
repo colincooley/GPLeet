@@ -13,7 +13,7 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
       fetchChatHistory(userId);
     } else {
       setChatHistory(null);
-      setMessageHistory(defaultMessage);
+      // setMessageHistory(defaultMessage);
     }
   }, [userId, setChatHistory, setMessageHistory, defaultMessage]);
 
@@ -60,11 +60,18 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
       return;
     }
 
+    setMessageHistory([]);
+
+  defaultMessage.forEach((message, index) => {
+    setTimeout(() => {
+      setMessageHistory(prevHistory => [...prevHistory, message]);
+    }, 1000 * index);
+  });
+
     if (currentChatId) {
       try {
         await updateMessageHistory(messageHistory);
         setCurrentChatId(null);
-        setMessageHistory(defaultMessage);
       } catch (error) {
         console.error('Error updating existing session:', error);
       }
