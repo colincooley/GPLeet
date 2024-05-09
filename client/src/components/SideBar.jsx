@@ -44,15 +44,15 @@ function SideBar({ show, onRegisterClick, messageHistory, setMessageHistory, ins
     }
   }
 
-  const handleNewChat = async () => {
-    try {
-      const newChatId = await insertMessageHistory(messageHistory);
-      setCurrentChatId(newChatId);
-      fetchChatHistory(userId);
-    } catch (error) {
-      console.error('Error starting new session:', error);
-    };
-  };
+  // const handleNewChat = async () => {
+  //   try {
+  //     const newChatId = await insertMessageHistory(messageHistory);
+  //     setCurrentChatId(newChatId);
+  //     fetchChatHistory(userId);
+  //   } catch (error) {
+  //     console.error('Error starting new session:', error);
+  //   };
+  // };
 
   const handleStartNewSession = async () => {
     if (!userId) {
